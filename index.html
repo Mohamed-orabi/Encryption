@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <title> Encryption/Decryption</title>
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+</head>
+
+<style>
+    div.demo1 {
+        word-wrap: break-word;
+    }
+
+    .split {
+        height: 100%;
+        width: 50%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    /* Control the left side */
+    .left {
+        left: 0;
+    }
+
+    /* Control the right side */
+    .right {
+        right: 0;
+    }
+
+    /* If you want the content centered horizontally and vertically */
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    /* Style the image inside the centered container, if needed */
+    .centered img {
+        width: 150px;
+        border-radius: 50%;
+    }
+</style>
+
+<body align="center">
+
+    <div class="split left">
+        <h1>Encryption</h1>
+        <table cellspacing="2" align="center" cellpadding="8" border="0">
+            <tr>
+                <td>Key</td>
+                <td><input type="text" placeholder="Key" id="n1"></td>
+            </tr>
+            <tr>
+                <td>Plain text</td>
+                <td><textarea type="text" placeholder="Plain text" id="e1"></textarea></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Encrypt" onClick="encrypt()" />
+                </td>
+            </tr>
+        </table>
+        <div id="demo1">AAA</div>
+    </div>
+
+    <div class="split right">
+        <h1>Decryption</h1>
+        <table cellspacing="2" align="center" cellpadding="8" border="0">
+            <tr>
+                <td>Key</td>
+                <td><input type="text" placeholder="Key" id="n2"></td>
+            </tr>
+            <tr>
+                <td>Cipher text</td>
+                <td><textarea type="text" placeholder="Cipher text" id="e2"></textarea></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Decrypt" onClick="decrypt()" />
+                </td>
+            </tr>
+        </table>
+        <div id="demo2">AAA</div>
+    </div>
+    <script type="text/javascript">
+        function encrypt() {
+            var key = document.getElementById("n1").value;
+            var value = document.getElementById("e1").value;
+
+            var encrypted = CryptoJS.AES.encrypt(value, key);
+            var decrypted = CryptoJS.AES.decrypt(encrypted, key)
+
+            document.getElementById("demo1").innerHTML = encrypted;
+
+            console.log(decrypted.toString(CryptoJS.enc.Utf8))
+            console.log(encrypted)
+
+        }
+        function decrypt() {
+            var key = document.getElementById("n2").value;
+            var value = document.getElementById("e2").value;
+
+            //var encrypted = CryptoJS.AES.encrypt(value, key);
+            var decrypted = CryptoJS.AES.decrypt(value, key);
+
+
+            document.getElementById("demo2").innerHTML = decrypted.toString(CryptoJS.enc.Utf8);
+
+            console.log(decrypted)
+            console.log(value)
+            console.log(key)
+
+        }    
+    </script>
+</body>
+
+</html>
